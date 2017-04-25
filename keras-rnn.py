@@ -8,7 +8,7 @@ from keras.utils import np_utils
 # load ascii text and covert to lowercase
 filename = "attenborough.txt"
 raw_text = open(filename).read()
-raw_text = raw_text.lower().split("")
+raw_text = raw_text.lower().split(" ")
 # create mapping of unique chars to integers
 chars = sorted(list(set(raw_text)))
 char_to_int = dict((c, i) for i, c in enumerate(chars))
