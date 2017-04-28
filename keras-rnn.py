@@ -50,10 +50,11 @@ model.add(Dropout(0.2))
 model.add(LSTM(384))
 model.add(Dropout(0.2))
 model.add(Dense(y.shape[1], activation='softmax'))
-model.compile(loss='categorical_crossentropy', optimizer='adam')
+model.load_weights("weights/weights-improvement-19-1.0566.hdf5")
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=["accuracy"])
 # define the checkpoint
 filepath="weights/weights-improvement-{epoch:02d}-{loss:.4f}.hdf5"
 checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
 callbacks_list = [checkpoint]
 # fit the model
-model.fit(x, y, epochs=20, batch_size=128, callbacks=callbacks_list)
+model.fit(x, y, epochs=20, batch_size=128, callbacks=callbacks_list, validation_split=1/12)
